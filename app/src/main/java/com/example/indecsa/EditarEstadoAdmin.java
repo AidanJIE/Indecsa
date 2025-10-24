@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
-public class AsignarEstadoAdmin extends Fragment {
+public class EditarEstadoAdmin extends Fragment {
 
-    public AsignarEstadoAdmin() {
+    public EditarEstadoAdmin() {
         // Constructor vacío requerido
     }
 
@@ -42,7 +42,7 @@ public class AsignarEstadoAdmin extends Fragment {
 
     private void navegarAFichaAgrega() {
         // Crear instancia del fragmento FichaAgrega
-         AgregarFicha ficha = new AgregarFicha();
+        Editfichaesp ficha = new Editfichaesp();
 
         // Reemplazar el fragment actual
         requireActivity().getSupportFragmentManager()

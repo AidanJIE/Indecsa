@@ -4,26 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 
 public class EditarContratistaFragment extends Fragment {
 
-    private String nombre;
-    private String descripcion;
-    private String proyecto;
+    private static final String ARG_NOMBRE = "nombre";
+    private static final String ARG_DESCRIPCION = "descripcion";
+    private String nombreContratista;
+    private String descripcionContratista;
 
     public EditarContratistaFragment() {
         // Constructor vacío requerido
     }
 
-    public static EditarContratistaFragment newInstance(String nombre, String descripcion, String proyecto) {
+    public static EditarContratistaFragment newInstance(String nombre, String descripcion) {
         EditarContratistaFragment fragment = new EditarContratistaFragment();
         Bundle args = new Bundle();
-        args.putString("nombre", nombre);
-        args.putString("descripcion", descripcion);
-        args.putString("proyecto", proyecto);
+        args.putString(ARG_NOMBRE, nombre);
+        args.putString(ARG_DESCRIPCION, descripcion);
         fragment.setArguments(args);
         return fragment;
     }
@@ -32,9 +32,8 @@ public class EditarContratistaFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            nombre = getArguments().getString("nombre");
-            descripcion = getArguments().getString("descripcion");
-            proyecto = getArguments().getString("proyecto");
+            nombreContratista = getArguments().getString(ARG_NOMBRE);
+            descripcionContratista = getArguments().getString(ARG_DESCRIPCION);
         }
     }
 
@@ -43,15 +42,26 @@ public class EditarContratistaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editar_contratista, container, false);
 
-        // Referencias al layout
-        TextView txtNombre = view.findViewById(R.id.txtNombre);
-        TextView txtDescripcion = view.findViewById(R.id.txtDescripcion);
-        TextView txtProyecto = view.findViewById(R.id.txtProyecto);
+        // Configurar los datos del contratista
 
-        // Mostrar datos recibidos (o inventados)
-        txtNombre.setText("Nombre: " + (nombre != null ? nombre : "Juan Pérez"));
-        txtDescripcion.setText("Descripción: " + (descripcion != null ? descripcion : "Contratista con 5 años de experiencia"));
-        txtProyecto.setText("Proyecto actual: " + (proyecto != null ? proyecto : "Remodelación de oficinas"));
+        TextView txtMensaje = view.findViewById(R.id.txtMensaje);
+        Button btnEditar = view.findViewById(R.id.btnEditar);
+        Button btnAgregar = view.findViewById(R.id.btnAgregar);
+
+        // Mostrar datos actuales
+        
+
+        // Configurar botón EDITAR
+        btnEditar.setOnClickListener(v -> {
+            // Aquí iría la lógica para editar el contratista
+            // Por ahora solo mostramos el mensaje de confirmación
+            txtMensaje.setVisibility(View.VISIBLE);
+        });
+
+        // Configurar botón AGREGAR
+        btnAgregar.setOnClickListener(v -> {
+            // Aquí iría la lógica para agregar nuevo proyecto
+        });
 
         return view;
     }

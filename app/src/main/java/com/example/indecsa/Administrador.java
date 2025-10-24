@@ -38,7 +38,7 @@ public class Administrador extends Fragment {
 
     private void navegarAAgregarFicha() {
         // Crear instancia del fragmento AgregarFicha
-        AgregarFicha agregarFichaFragment = new AgregarFicha();
+        AsignarEstadoAdmin agregarFichaFragment = new AsignarEstadoAdmin();
 
         // Reemplazar el fragment actual
         requireActivity().getSupportFragmentManager()
@@ -50,7 +50,7 @@ public class Administrador extends Fragment {
 
     private void navegarAEditarFicha() {
         // Crear instancia del fragmento Editfichaesp
-        Editfichaesp editarFichaFragment = new Editfichaesp();
+        EditarEstadoAdmin editarFichaFragment = new EditarEstadoAdmin();
 
         // Reemplazar el fragment actual
         requireActivity().getSupportFragmentManager()

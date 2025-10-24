@@ -10,9 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 public class FichaObraAdapter extends ArrayAdapter<String> {
-
     private final Context context;
     private final String[] nombres;
     private final String[] descripcion;
@@ -42,7 +43,29 @@ public class FichaObraAdapter extends ArrayAdapter<String> {
         img.setImageResource(imagenes[position]);
 
         btnEditar.setOnClickListener(v -> {
-            // Acción al presionar EDITAR
+            // Navegar al fragmento de edición
+            if (context instanceof FragmentActivity) {
+                FragmentActivity activity = (FragmentActivity) context;
+
+                // Crear el fragmento de edición y pasar los datos
+                EditarContratistaFragment editarFragment =
+                        EditarContratistaFragment.newInstance(
+                                nombres[position],
+                                descripcion[position]
+                        );
+
+                // Realizar la transacción del fragmento
+                FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+
+                // Reemplazar el fragmento actual con el de edición
+                transaction.replace(R.id.contenedorfragmentos, editarFragment);
+
+                // Agregar a la pila de retroceso para poder volver
+                transaction.addToBackStack(null);
+
+                // Ejecutar la transacción
+                transaction.commit();
+            }
         });
 
         return rowView;
