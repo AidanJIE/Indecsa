@@ -1,64 +1,35 @@
 package com.example.indecsa;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Administrador#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Administrador extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public Administrador() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Administrador.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Administrador newInstance(String param1, String param2) {
-        Administrador fragment = new Administrador();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // Constructor vacío requerido
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflar el layout del menú principal (tu XML con los botones Agregar/Editar)
         return inflater.inflate(R.layout.fragment_administrador, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Aquí puedes configurar los botones del menú si los necesitas
+        view.findViewById(R.id.btnImagen1).setOnClickListener(v -> {
+            // Acción para el botón "Agregar"
+        });
+
+        view.findViewById(R.id.btnImagen2).setOnClickListener(v -> {
+            // Acción para el botón "Editar"
+        });
     }
 }

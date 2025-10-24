@@ -12,6 +12,7 @@
         android:text="Bienvenido \n ¿Qué haremos hoy?"
         android:textAlignment="center"
         android:textSize="32sp"
+        android:layout_marginBottom="30dp"
         android:textStyle="bold"/>
 
     <!-- Contenedor de botones con imagen y texto -->
@@ -38,7 +39,7 @@
                 android:src="@drawable/img_4"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:contentDescription="Estado Activo" />
+                android:contentDescription="Agregar fichas" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +68,7 @@
                 android:src="@drawable/img_5"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:contentDescription="Estado Pendiente" />
+                android:contentDescription="Editar las fichas" />
 
             <TextView
                 android:layout_width="wrap_content"

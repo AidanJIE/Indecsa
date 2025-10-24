@@ -20,22 +20,22 @@ public class Inicio_sesion extends Fragment {
 
         // Botón de inicio de sesión
         view.findViewById(R.id.btnInicio_sesion).setOnClickListener(v -> {
-            // Al presionar, cambia al fragmento Editfichaesp
-            Editfichaesp editFichaFragment = new Editfichaesp();
+            // Cambia al fragmento del menú principal
+            Administrador menuFragment = new Administrador();
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorfragmentos, editFichaFragment)
+                    .replace(R.id.contenedorfragmentos, menuFragment)
                     .addToBackStack(null)
                     .commit();
         });
 
         // Botón de crear cuenta
         view.findViewById(R.id.btnCrear_cuenta).setOnClickListener(v -> {
-            // También te puede mandar al mismo fragmento por ahora
-            Editfichaesp editFichaFragment = new Editfichaesp();
+            // También cambia al menú principal
+            Administrador menuFragment = new Administrador();
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorfragmentos, editFichaFragment)
+                    .replace(R.id.contenedorfragmentos, menuFragment)
                     .addToBackStack(null)
                     .commit();
         });
