@@ -15,21 +15,48 @@ public class Administrador extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflar el layout del menú principal (tu XML con los botones Agregar/Editar)
-        return inflater.inflate(R.layout.fragment_administrador, container, false);
+        // Inflar el layout del menú principal
+        View view = inflater.inflate(R.layout.fragment_administrador, container, false);
+
+        // Configurar los botones
+        configurarBotonesMenu(view);
+
+        return view;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Aquí puedes configurar los botones del menú si los necesitas
+    private void configurarBotonesMenu(View view) {
+        // Botón "Agregar" (btnImagen1) - Va a AgregarFicha
         view.findViewById(R.id.btnImagen1).setOnClickListener(v -> {
-            // Acción para el botón "Agregar"
+            navegarAAgregarFicha();
         });
 
+        // Botón "Editar" (btnImagen2) - Va a Editfichaesp
         view.findViewById(R.id.btnImagen2).setOnClickListener(v -> {
-            // Acción para el botón "Editar"
+            navegarAEditarFicha();
         });
+    }
+
+    private void navegarAAgregarFicha() {
+        // Crear instancia del fragmento AgregarFicha
+        AgregarFicha agregarFichaFragment = new AgregarFicha();
+
+        // Reemplazar el fragment actual
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedorfragmentos, agregarFichaFragment)
+                .addToBackStack(null) // Para poder volver al menú principal
+                .commit();
+    }
+
+    private void navegarAEditarFicha() {
+        // Crear instancia del fragmento Editfichaesp
+        Editfichaesp editarFichaFragment = new Editfichaesp();
+
+        // Reemplazar el fragment actual
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedorfragmentos, editarFichaFragment)
+                .addToBackStack(null) // Para poder volver al menú principal
+                .commit();
     }
 }
