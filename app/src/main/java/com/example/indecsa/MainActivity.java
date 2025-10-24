@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Iniciar la transacción del fragmento
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.contenedorfragmentos, holawey);
+        transaction.replace(R.id.contenedorfragmentos, loginFragment);
         transaction.addToBackStack(null); // Opcional: para poder volver atrás
         transaction.commit();
     }
