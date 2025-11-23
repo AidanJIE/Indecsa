@@ -24,31 +24,30 @@ public class EditarEstadoAdmin extends Fragment {
     }
 
     private void configurarBotonesEstados(View view) {
-        // Botón Hidalgo
         view.findViewById(R.id.btnImagen1).setOnClickListener(v -> {
-            navegarAFichaAgrega();
+            navegarAFichaAgrega("HIDALGO");
         });
 
-        // Botón CDMX
         view.findViewById(R.id.btnImagen2).setOnClickListener(v -> {
-            navegarAFichaAgrega();
+            navegarAFichaAgrega("CDMX");
         });
 
-        // Botón Puebla
         view.findViewById(R.id.btnImagen3).setOnClickListener(v -> {
-            navegarAFichaAgrega();
+            navegarAFichaAgrega("PUEBLA");
         });
     }
 
-    private void navegarAFichaAgrega() {
-        // Crear instancia del fragmento FichaAgrega
-        Editfichaesp ficha = new Editfichaesp();
+    private void navegarAFichaAgrega(String estado) {
+        Fragment ficha = new Editfichaesp();
+        Bundle args = new Bundle();
+        args.putString("estado", estado);
+        ficha.setArguments(args);
 
-        // Reemplazar el fragment actual
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.contenedorfragmentos, ficha)
-                .addToBackStack(null) // Para poder volver
+                .addToBackStack(null)
                 .commit();
     }
+
 }

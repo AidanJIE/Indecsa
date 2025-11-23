@@ -9,25 +9,30 @@ import androidx.fragment.app.Fragment;
 
 public class FichaObra extends Fragment {
 
-    public FichaObra() {
-        // Constructor vacío
-    }
+    public FichaObra() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_ficha_obra, container, false);
 
-        // Inicializar ListView
         ListView lista = view.findViewById(R.id.listaContratistas);
 
-        // Datos de prueba (luego puedes cargarlos de BD)
+        // Datos de prueba
         String[] nombres = {"Juan Pérez", "María López", "Carlos Ruiz"};
         String[] descripcion = {"Experto en albañilería", "Arquitecta de interiores", "Supervisor de obras"};
+        int[] calificaciones = {5, 3, 4};
         int[] imagenes = {R.drawable.usuario, R.drawable.usuario, R.drawable.usuario};
 
-        // Adaptador personalizado
-        FichaObraAdapter adapter = new FichaObraAdapter(getContext(), nombres, descripcion, imagenes);
+        FichaObraAdapter adapter = new FichaObraAdapter(
+                getContext(),
+                nombres,
+                descripcion,
+                imagenes,
+                calificaciones
+        );
+
         lista.setAdapter(adapter);
 
         return view;

@@ -33,7 +33,6 @@ public class Editfichaesp extends Fragment {
         Button btnRemodelacion = view.findViewById(R.id.btnRemodelacion);
         Button btnVentaMobiliario = view.findViewById(R.id.btnVentaMobiliario);
         Button btnInstalacionMobiliario = view.findViewById(R.id.btnInstalacionMobiliario);
-
         // Un solo listener para todos
         View.OnClickListener listener = v -> {
             // Obtener texto del botón presionado
