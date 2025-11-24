@@ -4,51 +4,54 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 
 public class AsignarEstadoAdmin extends Fragment {
 
-    public AsignarEstadoAdmin() {
-        // Constructor vacío requerido
-    }
+    public AsignarEstadoAdmin() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_asignaredoadmin, container, false);
 
-        // Configurar los botones de estados
         configurarBotonesEstados(view);
 
         return view;
     }
 
     private void configurarBotonesEstados(View view) {
-        // Botón Hidalgo
+
+        // HIDALGO
         view.findViewById(R.id.btnImagen1).setOnClickListener(v -> {
-            navegarAFichaAgrega();
+            abrirEspecialidades("Hidalgo");
         });
 
-        // Botón CDMX
+        // CDMX
         view.findViewById(R.id.btnImagen2).setOnClickListener(v -> {
-            navegarAFichaAgrega();
+            abrirEspecialidades("CDMX");
         });
 
-        // Botón Puebla
+        // PUEBLA
         view.findViewById(R.id.btnImagen3).setOnClickListener(v -> {
-            navegarAFichaAgrega();
+            abrirEspecialidades("Puebla");
         });
     }
 
-    private void navegarAFichaAgrega() {
-        // Crear instancia del fragmento FichaAgrega
-         AgregarFicha ficha = new AgregarFicha();
+    private void abrirEspecialidades(String estado) {
 
-        // Reemplazar el fragment actual
+        AgregarFicha fragment = new AgregarFicha();
+
+        Bundle args = new Bundle();
+        args.putString("estadoSeleccionado", estado);
+        fragment.setArguments(args);
+
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.contenedorfragmentos, ficha)
-                .addToBackStack(null) // Para poder volver
+                .replace(R.id.contenedorfragmentos, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

@@ -8,48 +8,55 @@ import androidx.fragment.app.Fragment;
 
 public class AgregarFicha extends Fragment {
 
+    private String estado;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_agregar_ficha, container, false);
 
-        // Configurar los botones de especialidades
+        if (getArguments() != null) {
+            estado = getArguments().getString("estadoSeleccionado");
+        }
+
         configurarBotonesEspecialidades(view);
 
         return view;
     }
 
     private void configurarBotonesEspecialidades(View view) {
-        // Botón OBRA
+
         view.findViewById(R.id.btnObra).setOnClickListener(v -> {
-            navegarAEstados("OBRA");
+            navegarAFichaFinal("OBRA");
         });
 
-        // Botón REMODELACION
         view.findViewById(R.id.btnRemodelacion).setOnClickListener(v -> {
-            navegarAEstados("REMODELACION");
+            navegarAFichaFinal("REMODELACION");
         });
 
-        // Botón VENTA DE MOBILIARIO
         view.findViewById(R.id.btnVentaMobiliario).setOnClickListener(v -> {
-            navegarAEstados("VENTA_MOBILIARIO");
+            navegarAFichaFinal("VENTA_MOBILIARIO");
         });
 
-        // Botón INSTALACION DE MOBILIARIO
         view.findViewById(R.id.btnInstalacionMobiliario).setOnClickListener(v -> {
-            navegarAEstados("INSTALACION_MOBILIARIO");
+            navegarAFichaFinal("INSTALACION_MOBILIARIO");
         });
     }
 
-    private void navegarAEstados(String especialidad) {
-        // Crear instancia del fragmento de estados y pasar la especialidad
-         fichaagrega estadosFrafment = new fichaagrega ();
+    private void navegarAFichaFinal(String especialidad) {
 
-        // Reemplazar el fragment actual
+        fichaagrega fragment = new fichaagrega();
+
+        Bundle args = new Bundle();
+        args.putString("estadoSeleccionado", estado);
+        args.putString("especialidadSeleccionada", especialidad);
+        fragment.setArguments(args);
+
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.contenedorfragmentos, estadosFrafment)
-                .addToBackStack(null) // Para poder volver
+                .replace(R.id.contenedorfragmentos, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

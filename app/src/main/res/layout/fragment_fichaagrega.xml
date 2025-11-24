@@ -1,107 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#E6E6E6"
-    android:padding="10dp"
-    android:layout_marginBottom="15dp"
-    android:elevation="3dp">
+    android:layout_height="match_parent"
+    android:background="#EFEFEF">
 
-    <!-- Encabezado MODIFICADO -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AGREGAR FICHA DE CONTRATISTA:"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:textSize="14sp" />
-
-    <!-- Contenido -->
     <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp">
+        android:layout_height="wrap_content">
 
-        <!-- Imagen del contratista -->
-        <ImageView
-            android:id="@+id/imgContratista"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/usuario"
-            android:layout_marginRight="10dp"
-            android:background="#CCCCCC"
-            android:scaleType="centerCrop" />
-
-        <!-- Datos del contratista -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:text="AGREGAR CONTRATISTA"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#2D2858"
+            android:layout_marginBottom="20dp"/>
 
-            <TextView
-                android:id="@+id/txtNombreContratista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre del contratista"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#000" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:orientation="vertical"
+            android:background="@drawable/shape_card_round"
+            android:elevation="6dp">
 
-            <TextView
-                android:id="@+id/txtDescripcionContratista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descripción del contratista"
-                android:textSize="14sp"
-                android:textColor="#333" />
+            <EditText
+                android:id="@+id/edinombrecont"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Nombre del contratista"
+                android:background="@drawable/shape_input"
+                android:paddingHorizontal="12dp" />
+
+            <EditText
+                android:id="@+id/edidatit2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Descripción"
+                android:background="@drawable/shape_input"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="12dp" />
+
+            <EditText
+                android:id="@+id/edidatit4"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Equipo contratista"
+                android:background="@drawable/shape_input"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="12dp" />
+
+            <EditText
+                android:id="@+id/edidatit3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Asignación del proyecto"
+                android:background="@drawable/shape_input"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="12dp" />
+
+            <Spinner
+                android:id="@+id/spinnerEspecialidad"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_input"
+                android:layout_marginTop="15dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerEstado"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_input"
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
 
-        <!-- Botón EDITAR -->
         <Button
-            android:id="@+id/btnEditar"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
-            android:text="AGREGAR"
-            android:textAllCaps="false"
-            android:background="#3B3673"
-            android:textColor="#FFFFFF" />
-
+            android:id="@+id/btnAgregar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="GUARDAR"
+            android:textColor="#FFF"
+            android:background="@drawable/shape_button"
+            android:layout_marginTop="20dp"/>
     </LinearLayout>
-
-    <!-- Calificación (estrellas) -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="6dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>
