@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private void cargarLoginFragment() {
         // Crear una instancia del fragmento de login
         Inicio_sesion loginFragment = new Inicio_sesion();
-        AsignarEstadoAdmin holawey = new AsignarEstadoAdmin();
-        FichaObra kikin = new FichaObra();
+
 
 
         // Iniciar la transacción del fragmento
