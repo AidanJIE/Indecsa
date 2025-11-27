@@ -10,7 +10,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.indecsa.models.LoginRequest;
+import com.example.indecsa.models.LoginRequestAdmin;
+import com.example.indecsa.models.LoginRequestCapHum;
 import com.example.indecsa.models.LoginResponse;
 import com.example.indecsa.network.ApiService;
 import com.example.indecsa.network.RetrofitClient;
@@ -34,18 +35,18 @@ public class Inicio_sesion extends Fragment {
         etCorreo = view.findViewById(R.id.etCorreo);
         etPassword = view.findViewById(R.id.etPassword);
 
-        // Botón login
-        view.findViewById(R.id.btnInicio_sesion).setOnClickListener(v -> intentarLogin());
+        view.findViewById(R.id.btnInicio_sesion)
+                .setOnClickListener(v -> intentarLogin());
 
-        // Botón crear cuenta
-        view.findViewById(R.id.btnCrear_cuenta).setOnClickListener(v -> {
-            Registrarse r = new Registrarse();
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.contenedorfragmentos, r)
-                    .addToBackStack(null)
-                    .commit();
-        });
+        view.findViewById(R.id.btnCrear_cuenta)
+                .setOnClickListener(v -> {
+                    Registrarse r = new Registrarse();
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.contenedorfragmentos, r)
+                            .addToBackStack(null)
+                            .commit();
+                });
 
         return view;
     }
@@ -61,54 +62,87 @@ public class Inicio_sesion extends Fragment {
         }
 
         ApiService api = RetrofitClient.getClient().create(ApiService.class);
-        LoginRequest request = new LoginRequest(correo, contra);
 
-        api.loginCapitalHumano(request).enqueue(new Callback<LoginResponse>() {
+        // ----- PRIMERO INTENTAMOS LOGIN ADMIN -----
+        LoginRequestAdmin adminRequest = new LoginRequestAdmin(correo, contra);
+
+        api.loginAdmin(adminRequest).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                if (!response.isSuccessful()) {
-                    Toast.makeText(requireContext(),
-                            "Error en el servidor (" + response.code() + ")",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 LoginResponse res = response.body();
 
-                if (res == null) {
+                if (response.isSuccessful()
+                        && res != null
+                        && res.isSuccess()
+                        && res.getAdmin() != null) {
+
                     Toast.makeText(requireContext(),
-                            "Respuesta vacía del servidor",
+                            "Bienvenido administrador: " + res.getAdmin().getCorreoAdmin(),
                             Toast.LENGTH_SHORT).show();
+
+                    irAlMenuAdministrador();
                     return;
                 }
 
-                if (res.isSuccess()) {
-
-                    Toast.makeText(requireContext(),
-                            "Bienvenido " + res.getCapitalHumano().getCorreoCapHum(),
-                            Toast.LENGTH_SHORT).show();
-
-                    // Cambiar al menú
-                    Administrador menu = new Administrador();
-                    requireActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.contenedorfragmentos, menu)
-                            .commit();
-
-                } else {
-                    Toast.makeText(requireContext(), res.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                // Si no es admin → intentamos capital humano
+                intentarLoginCapitalHumano(correo, contra);
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Log.e("LOGIN_ERROR", "Error ADMIN: ", t);
+                intentarLoginCapitalHumano(correo, contra);
+            }
+        });
+    }
+
+    private void intentarLoginCapitalHumano(String correo, String contra) {
+
+        ApiService api = RetrofitClient.getClient().create(ApiService.class);
+
+        LoginRequestCapHum capHumRequest = new LoginRequestCapHum(correo, contra);
+
+        api.loginCapHum(capHumRequest).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+                LoginResponse res = response.body();
+
+                if (response.isSuccessful()
+                        && res != null
+                        && res.isSuccess()
+                        && res.getCapitalHumano() != null) {
+
+                    Toast.makeText(requireContext(),
+                            "Bienvenido Capital Humano: " + res.getCapitalHumano().getCorreoCapHum(),
+                            Toast.LENGTH_SHORT).show();
+
+                    irAlMenuAdministrador();
+                    return;
+                }
+
+                Toast.makeText(requireContext(),
+                        "Correo o contraseña incorrectos",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Log.e("LOGIN_ERROR", "Error CAPHUM: ", t);
                 Toast.makeText(requireContext(),
                         "Error de conexión: " + t.getMessage(),
                         Toast.LENGTH_SHORT).show();
-
-                Log.e("LOGIN_ERROR", "Fallo de conexión", t);
             }
         });
+    }
+
+    // ---- IR AL MISMO FRAGMENTO PARA AMBOS ROLES ----
+    private void irAlMenuAdministrador() {
+        Administrador menu = new Administrador();
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedorfragmentos, menu)
+                .commit();
     }
 }
