@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.indecsa.models.LoginRequestAdmin;
 import com.example.indecsa.models.LoginRequestCapHum;
 import com.example.indecsa.models.LoginResponse;
