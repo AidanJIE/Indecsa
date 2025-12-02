@@ -116,7 +116,7 @@ public class Inicio_sesion extends Fragment {
                             "Bienvenido Capital Humano: " + res.getCapitalHumano().getCorreoCapHum(),
                             Toast.LENGTH_SHORT).show();
 
-                    irAlMenuAdministrador();
+                    irAlMenuCapitalHumano();
                     return;
                 }
 
@@ -138,6 +138,14 @@ public class Inicio_sesion extends Fragment {
     // ---- IR AL MISMO FRAGMENTO PARA AMBOS ROLES ----
     private void irAlMenuAdministrador() {
         Administrador menu = new Administrador();
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedorfragmentos, menu)
+                .commit();
+    }
+
+    private void irAlMenuCapitalHumano() {
+        CapitalHumano menu = new CapitalHumano();
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.contenedorfragmentos, menu)
