@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.indecsa">
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="Indecsa"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Indecsa"
+        android:theme="@style/Theme.Indecsa">
 
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
-
-        tools:targetApi="31">
-
+        <!-- Actividad principal con intent-filter: requiere android:exported -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.indecsa.InicioSesionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +18,8 @@
             </intent-filter>
         </activity>
 
-    </application>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+        <!-- Otras actividades sin intent-filter: no requieren android:exported -->
+        <activity android:name="com.example.indecsa.EstadoActivity" />
+        <activity android:name="com.example.indecsa.EspecialidadActivity" />
+        <activity android:name="com.example.indecsa.CarteraActivity" />    </application>
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.indecsa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,6 @@ public class Registrarse extends Fragment {
     }
 
     private void registrarUsuario() {
-
         String correo = ediCorreo.getText().toString().trim();
         String password = ediPassword.getText().toString().trim();
         String rol = spinnerRol.getSelectedItem().toString();
@@ -68,11 +68,7 @@ public class Registrarse extends Fragment {
 
         ApiService api = RetrofitClient.getClient().create(ApiService.class);
 
-        // ============================================
-        // 🔥 REGISTRO ADMIN
-        // ============================================
         if (rol.equalsIgnoreCase("Administrador")) {
-
             LoginRequestAdmin req = new LoginRequestAdmin(correo, password);
 
             api.registrarAdmin(req).enqueue(new Callback<AdminDto>() {
@@ -98,12 +94,7 @@ public class Registrarse extends Fragment {
                 }
             });
 
-        }
-        // ============================================
-        // 🔥 REGISTRO CAPITAL HUMANO
-        // ============================================
-        else {
-
+        } else {
             LoginRequestCapHum req = new LoginRequestCapHum(correo, password);
 
             api.registrarCapHumano(req).enqueue(new Callback<CapHumDto>() {
@@ -132,12 +123,9 @@ public class Registrarse extends Fragment {
     }
 
     private void volverALogin() {
-        Inicio_sesion loginFragment = new Inicio_sesion();
-
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.contenedorfragmentos, loginFragment)
-                .addToBackStack(null)
-                .commit();
+        // ✅ En lugar de instanciar un Activity con new, lanzamos la Activity
+        Intent intent = new Intent(requireContext(), Inicio_sesion.class);
+        startActivity(intent);
+        requireActivity().finish(); // opcional: cerrar el fragment contenedor
     }
 }
