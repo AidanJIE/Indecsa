@@ -31,15 +31,15 @@
             android:orientation="vertical"
             android:gravity="center"
             android:layout_marginHorizontal="8dp">
-
             <ImageButton
                 android:id="@+id/btnImagen1"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/img"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:contentDescription="Estado Activo" />
+                android:background="@drawable/frame_contorno"
+                android:clipToOutline="true"
+                android:contentDescription="Hidalgo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -65,10 +65,11 @@
                 android:id="@+id/btnImagen2"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/img_3"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:contentDescription="Estado Pendiente" />
+                android:contentDescription="Ciudad de Mexico"
+                android:background="@drawable/frame_contorno"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_3" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,10 +94,11 @@
                 android:id="@+id/btnImagen3"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/img_2"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:contentDescription="Estado Inactivo" />
+                android:contentDescription="Puebla"
+                android:background="@drawable/frame_contorno"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_2" />
 
             <TextView
                 android:layout_width="wrap_content"

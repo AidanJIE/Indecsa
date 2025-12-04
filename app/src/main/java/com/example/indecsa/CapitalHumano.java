@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class CapitalHumano extends Fragment {
 
@@ -41,9 +41,9 @@ public class CapitalHumano extends Fragment {
                 Toast.makeText(getContext(), "PROYECTOS", Toast.LENGTH_SHORT).show()
         );
 
-        // Evento botón 2
+        // Evento botón 2 - MODIFICADO PARA NAVEGAR A TRABAJADORES
         btnTrabajadores.setOnClickListener(v ->
-                Toast.makeText(getContext(), "TRABAJADORES", Toast.LENGTH_SHORT).show()
+                navegarATrabajadoresEstado()
         );
 
         // Evento botón 3
@@ -52,5 +52,18 @@ public class CapitalHumano extends Fragment {
         );
 
         return view;
+    }
+
+    // MÉTODO NUEVO para navegar a TrabajadoresEstadoCapitalHumano
+    private void navegarATrabajadoresEstado() {
+        TrabajadoresEstadoCapitalHumano fragment = new TrabajadoresEstadoCapitalHumano();
+
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.contenedorfragmentos, fragment);
+        transaction.addToBackStack("capital_humano"); // Puedes volver atrás
+        transaction.commit();
+
+        // Opcional: mostrar un mensaje
+        Toast.makeText(getContext(), "TRABAJADORES - CAPITAL HUMANO", Toast.LENGTH_SHORT).show();
     }
 }
