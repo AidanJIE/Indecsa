@@ -1,14 +1,18 @@
 package com.example.indecsa;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.*;
 import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class CarteraActivity extends AppCompatActivity {
+public class Cartera extends Fragment {
+
     private EditText edtProyecto;
     private RatingBar ratingExperiencia;
     private Button btnDisponible, btnFechaInicio, btnFechaFin, btnGuardar;
@@ -16,20 +20,29 @@ public class CarteraActivity extends AppCompatActivity {
     private boolean disponible = true;
     private ArrayList<String> equipo;
 
+    private Context mContext;
+
+    public Cartera() {
+        // Constructor vacío obligatorio
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.cartera_contratistas);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        edtProyecto = findViewById(R.id.edtProyecto);
-        ratingExperiencia = findViewById(R.id.ratingExperiencia);
-        btnDisponible = findViewById(R.id.btnDisponible);
-        btnFechaInicio = findViewById(R.id.btnFechaInicio);
-        btnFechaFin = findViewById(R.id.btnFechaFin);
-        btnGuardar = findViewById(R.id.btnGuardar);
-        listEquipo = findViewById(R.id.listEquipo);
+        View view = inflater.inflate(R.layout.cartera_contratistas, container, false);
 
-        // Equipo de trabajo (5 trabajadores con nombre, NSS y especialidad)
+        mContext = getContext();
+
+        edtProyecto = view.findViewById(R.id.edtProyecto);
+        ratingExperiencia = view.findViewById(R.id.ratingExperiencia);
+        btnDisponible = view.findViewById(R.id.btnDisponible);
+        btnFechaInicio = view.findViewById(R.id.btnFechaInicio);
+        btnFechaFin = view.findViewById(R.id.btnFechaFin);
+        btnGuardar = view.findViewById(R.id.btnGuardar);
+        listEquipo = view.findViewById(R.id.listEquipo);
+
+        // Equipo de ejemplo
         equipo = new ArrayList<>();
         equipo.add("Juan Pérez | NSS: 12345 | Albañilería");
         equipo.add("María López | NSS: 67890 | Electricidad");
@@ -38,16 +51,16 @@ public class CarteraActivity extends AppCompatActivity {
         equipo.add("Luis Ramírez | NSS: 11223 | Carpintería");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
+                mContext,
                 android.R.layout.simple_list_item_1,
                 equipo
         );
         listEquipo.setAdapter(adapter);
 
-        // Cargar datos guardados al entrar
+        // Cargar datos previos
         cargarCambios();
 
-        // Botón disponible con colores
+        // Botón disponible
         btnDisponible.setOnClickListener(v -> {
             disponible = !disponible;
             actualizarBotonDisponible();
@@ -57,8 +70,10 @@ public class CarteraActivity extends AppCompatActivity {
         btnFechaInicio.setOnClickListener(v -> mostrarCalendario(btnFechaInicio));
         btnFechaFin.setOnClickListener(v -> mostrarCalendario(btnFechaFin));
 
-        // Botón guardar cambios
+        // Guardar
         btnGuardar.setOnClickListener(v -> guardarCambios());
+
+        return view;
     }
 
     private void actualizarBotonDisponible() {
@@ -78,19 +93,18 @@ public class CarteraActivity extends AppCompatActivity {
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
+                mContext,
                 (view, year, month, dayOfMonth) -> {
-                    String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-                    boton.setText(fechaSeleccionada);
+                    String fecha = dayOfMonth + "/" + (month + 1) + "/" + year;
+                    boton.setText(fecha);
                 },
                 año, mes, dia
         );
         datePickerDialog.show();
     }
 
-    // Guardar cambios en SharedPreferences
     private void guardarCambios() {
-        SharedPreferences prefs = getSharedPreferences("CarteraPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = mContext.getSharedPreferences("CarteraPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
         editor.putString("proyecto", edtProyecto.getText().toString());
@@ -99,21 +113,17 @@ public class CarteraActivity extends AppCompatActivity {
         editor.putString("fechaInicio", btnFechaInicio.getText().toString());
         editor.putString("fechaFin", btnFechaFin.getText().toString());
 
-        // Guardar equipo como texto concatenado
-        StringBuilder equipoTexto = new StringBuilder();
-        for (String trabajador : equipo) {
-            equipoTexto.append(trabajador).append(";");
-        }
-        editor.putString("equipo", equipoTexto.toString());
+        StringBuilder sb = new StringBuilder();
+        for (String t : equipo) sb.append(t).append(";");
+        editor.putString("equipo", sb.toString());
 
-        editor.apply(); // Guarda los cambios
+        editor.apply();
 
-        Toast.makeText(this, "SE GUARDARON LOS CAMBIOS", Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, "SE GUARDARON LOS CAMBIOS", Toast.LENGTH_LONG).show();
     }
 
-    // Cargar cambios al entrar
     private void cargarCambios() {
-        SharedPreferences prefs = getSharedPreferences("CarteraPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = mContext.getSharedPreferences("CarteraPrefs", Context.MODE_PRIVATE);
 
         edtProyecto.setText(prefs.getString("proyecto", ""));
         ratingExperiencia.setRating(prefs.getFloat("experiencia", 0f));
@@ -123,18 +133,16 @@ public class CarteraActivity extends AppCompatActivity {
         btnFechaInicio.setText(prefs.getString("fechaInicio", "Seleccionar Fecha de Inicio"));
         btnFechaFin.setText(prefs.getString("fechaFin", "Seleccionar Fecha de Fin"));
 
-        // Cargar equipo si se guardó
         String equipoTexto = prefs.getString("equipo", "");
         if (!equipoTexto.isEmpty()) {
             String[] trabajadores = equipoTexto.split(";");
             equipo.clear();
             for (String t : trabajadores) {
-                if (!t.trim().isEmpty()) {
-                    equipo.add(t.trim());
-                }
+                if (!t.trim().isEmpty()) equipo.add(t.trim());
             }
+
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                    this,
+                    mContext,
                     android.R.layout.simple_list_item_1,
                     equipo
             );
