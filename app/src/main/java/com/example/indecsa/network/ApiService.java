@@ -2,12 +2,16 @@ package com.example.indecsa.network;
 
 import com.example.indecsa.models.AdminDto;
 import com.example.indecsa.models.CapHumDto;
+import com.example.indecsa.models.Contratista;
 import com.example.indecsa.models.LoginRequestAdmin;
 import com.example.indecsa.models.LoginRequestCapHum;
 import com.example.indecsa.models.LoginResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiService {
@@ -26,6 +30,12 @@ public interface ApiService {
 
     @POST("capitalhumano")
     Call<CapHumDto> registrarCapHumano(@Body LoginRequestCapHum request);
+
+    @POST("/indecsa/api/contratistas")
+    Call<Contratista> crearContratista(@Body Contratista contratista);
+
+    @GET("/indecsa/api/contratistas")
+    Call<List<Contratista>> obtenerContratistas();
 
 
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,7 +21,7 @@ public class EditarContratista extends Fragment {
     private String nombreContratista;
     private String descripcionContratista;
 
-    private int calificacion = 0;
+    private float calificacion = 0f;
 
     public EditarContratista() {}
 
@@ -49,89 +49,41 @@ public class EditarContratista extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_editar_contratista, container, false);
 
-        // ==============================
-        // REFERENCIAS A VISTAS
-        // ==============================
-
         EditText edtNombre = view.findViewById(R.id.edinombrecont);
         EditText edtDescripcion = view.findViewById(R.id.edidatit2);
         Spinner spnEspecialidad = view.findViewById(R.id.spinnerEspecialidad);
         Spinner spnEstado = view.findViewById(R.id.spinnerEstado);
         TextView txtMensaje = view.findViewById(R.id.txtMensaje);
         Button btnEditar = view.findViewById(R.id.btnEditar);
+        RatingBar ratingBar = view.findViewById(R.id.ratingExperiencia); // NUEVO
 
-        ImageButton star1 = view.findViewById(R.id.star1);
-        ImageButton star2 = view.findViewById(R.id.star2);
-        ImageButton star3 = view.findViewById(R.id.star3);
-        ImageButton star4 = view.findViewById(R.id.star4);
-        ImageButton star5 = view.findViewById(R.id.star5);
-
-        // ==============================
-        // MOSTRAR DATOS EN LOS CAMPOS
-        // ==============================
-
+        // Cargar datos
         edtNombre.setText(nombreContratista);
         edtDescripcion.setText(descripcionContratista);
 
-        // ==============================
-        // SPINNER ESPECIALIDAD
-        // ==============================
-
+        // Spinner especialidad
         String[] especialidades = {"OBRA", "REMODELACIÓN", "VENTA DE MOBILIARIO", "INSTALACIÓN DE MOBILIARIO"};
         ArrayAdapter<String> adapterEsp = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, especialidades);
         adapterEsp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnEspecialidad.setAdapter(adapterEsp);
 
-        // ==============================
-        // SPINNER ESTADO
-        // ==============================
-
+        // Spinner estado
         String[] estados = {"Hidalgo", "CDMX", "Puebla"};
         ArrayAdapter<String> adapterEst = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, estados);
         adapterEst.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnEstado.setAdapter(adapterEst);
 
-        // ==============================
-        // SISTEMA DE ESTRELLAS (CALIFICACIÓN)
-        // ==============================
+        // RatingBar listener
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
+            calificacion = rating;
+        });
 
-        View.OnClickListener listenerStar = v -> {
-            int id = v.getId();
-
-            if (id == R.id.star1) calificacion = 1;
-            else if (id == R.id.star2) calificacion = 2;
-            else if (id == R.id.star3) calificacion = 3;
-            else if (id == R.id.star4) calificacion = 4;
-            else if (id == R.id.star5) calificacion = 5;
-
-            actualizarEstrellas(star1, star2, star3, star4, star5);
-        };
-
-
-        star1.setOnClickListener(listenerStar);
-        star2.setOnClickListener(listenerStar);
-        star3.setOnClickListener(listenerStar);
-        star4.setOnClickListener(listenerStar);
-        star5.setOnClickListener(listenerStar);
-
-        // ==============================
-        // BOTÓN GUARDAR
-        // ==============================
-
+        // Botón guardar
         btnEditar.setOnClickListener(v -> {
             txtMensaje.setText("SE EDITÓ CORRECTAMENTE (Calificación: " + calificacion + ")");
             txtMensaje.setVisibility(View.VISIBLE);
         });
 
         return view;
-    }
-
-    private void actualizarEstrellas(ImageButton... stars) {
-        for (int i = 0; i < stars.length; i++) {
-            if (i < calificacion)
-                stars[i].setImageResource(R.drawable.ic_star);
-            else
-                stars[i].setImageResource(R.drawable.estrellavacia);
-        }
     }
 }

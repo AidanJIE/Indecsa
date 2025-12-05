@@ -28,6 +28,7 @@
             android:background="@drawable/shape_card_round"
             android:elevation="6dp">
 
+            <!-- NOMBRE -->
             <EditText
                 android:id="@+id/edinombrecont"
                 android:layout_width="match_parent"
@@ -36,8 +37,9 @@
                 android:background="@drawable/shape_input"
                 android:paddingHorizontal="12dp" />
 
+            <!-- DESCRIPCIÓN -->
             <EditText
-                android:id="@+id/edidatit2"
+                android:id="@+id/edidescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:hint="Descripción"
@@ -45,24 +47,29 @@
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="12dp" />
 
+            <!-- TELÉFONO -->
             <EditText
-                android:id="@+id/edidatit4"
+                android:id="@+id/editelefono"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Equipo contratista"
+                android:hint="Teléfono"
+                android:inputType="phone"
                 android:background="@drawable/shape_input"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="12dp" />
 
+            <!-- CORREO -->
             <EditText
-                android:id="@+id/edidatit3"
+                android:id="@+id/edicorreo"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Asignación del proyecto"
+                android:hint="Correo electrónico"
+                android:inputType="textEmailAddress"
                 android:background="@drawable/shape_input"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="12dp" />
 
+            <!-- ESPECIALIDAD -->
             <Spinner
                 android:id="@+id/spinnerEspecialidad"
                 android:layout_width="match_parent"
@@ -70,12 +77,24 @@
                 android:background="@drawable/shape_input"
                 android:layout_marginTop="15dp"/>
 
+            <!-- ESTADO -->
             <Spinner
                 android:id="@+id/spinnerEstado"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/shape_input"
                 android:layout_marginTop="10dp"/>
+
+            <!-- CALIFICACIÓN -->
+            <RatingBar
+                android:id="@+id/ratingCalificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center" />
+
         </LinearLayout>
 
         <Button
