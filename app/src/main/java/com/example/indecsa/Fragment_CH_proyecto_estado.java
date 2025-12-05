@@ -1,64 +1,83 @@
 package com.example.indecsa;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_CH_proyecto_estado#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Fragment_CH_proyecto_estado extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // Clave para enviar el nombre del estado al fragmento destino
+    private static final String KEY_ESTADO = "estado_seleccionado";
 
     public Fragment_CH_proyecto_estado() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_CH_proyecto_estado.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment_CH_proyecto_estado newInstance(String param1, String param2) {
-        Fragment_CH_proyecto_estado fragment = new Fragment_CH_proyecto_estado();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // Constructor vacío requerido
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Asume que el nombre del layout es fragment_ch_proyecto_estado.xml
         return inflater.inflate(R.layout.fragment__c_h_proyecto_estado, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // 1. Encontrar los botones en el diseño
+        ImageButton btnHidalgo = view.findViewById(R.id.btnHidalgo);
+        ImageButton btnCDMX = view.findViewById(R.id.btnCDMX);
+        ImageButton btnPuebla = view.findViewById(R.id.btnPuebla);
+
+        // 2. Asignar los eventos de clic para navegar, enviando el nombre del estado
+        btnHidalgo.setOnClickListener(v -> irAProyectos("Hidalgo"));
+        btnCDMX.setOnClickListener(v -> irAProyectos("CDMX"));
+        btnPuebla.setOnClickListener(v -> irAProyectos("Puebla"));
+    }
+
+    /**
+     * Realiza la transición al fragmento de especialidad correspondiente, enviando el estado seleccionado.
+     * @param nombreEstado El nombre del estado que se pulsó (ej: "Hidalgo").
+     */
+    private void irAProyectos(String nombreEstado) {
+
+        // 1. Determinar qué fragmento instanciar basado en el nombre del estado
+        Fragment siguienteFragment;
+
+        switch (nombreEstado) {
+            case "CDMX":
+                siguienteFragment = new c_h_proyecto_especialidad_CDMX();
+                break;
+            case "Puebla":
+                siguienteFragment = new c_h_proyecto_especialidad_puebla();
+                break;
+            case "Hidalgo":
+                siguienteFragment = new c_h_proyecto_especialidad_hidalgo();
+                break;
+            default:
+                // Opcional: Manejar un caso por defecto si el nombre del estado no coincide
+                // Por ahora, asumiremos que solo se presionan los 3 botones
+                return;
+        }
+
+        // 2. Empaquetar el nombre del estado en un Bundle (Esto sigue siendo útil)
+        Bundle args = new Bundle();
+        args.putString(KEY_ESTADO, nombreEstado);
+        siguienteFragment.setArguments(args);
+
+        // 3. Realizar la transacción de fragmentos
+        if (getActivity() != null) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedorfragmentos, siguienteFragment)
+                    .addToBackStack(null)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit();
+        }
     }
 }

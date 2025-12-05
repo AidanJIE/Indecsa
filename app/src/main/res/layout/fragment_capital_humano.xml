@@ -44,9 +44,9 @@
                 android:id="@+id/btnproyectos"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@null"
                 android:src="@drawable/proyectos"
-                android:scaleType="fitCenter"
+                android:background="@drawable/frame_contorno"
+                android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
             <TextView
@@ -70,9 +70,9 @@
                 android:id="@+id/btnTrabajadores"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@null"
                 android:src="@drawable/trabajadores"
-                android:scaleType="fitCenter"
+                android:background="@drawable/frame_contorno"
+                android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
             <TextView
@@ -96,9 +96,9 @@
                 android:id="@+id/btnOtraCosa"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@null"
                 android:src="@drawable/administracion"
-                android:scaleType="fitCenter"
+                android:background="@drawable/frame_contorno"
+                android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
             <TextView

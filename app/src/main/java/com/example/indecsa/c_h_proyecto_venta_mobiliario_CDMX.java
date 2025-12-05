@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link c_h_proyecto_especialidad#newInstance} factory method to
+ * Use the {@link c_h_proyecto_venta_mobiliario_CDMX#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class c_h_proyecto_especialidad extends Fragment {
+public class c_h_proyecto_venta_mobiliario_CDMX extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class c_h_proyecto_especialidad extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public c_h_proyecto_especialidad() {
+    public c_h_proyecto_venta_mobiliario_CDMX() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class c_h_proyecto_especialidad extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment c_h_proyecto_especialidad.
+     * @return A new instance of fragment c_h_proyecto_venta_mobiliario_CDMX.
      */
     // TODO: Rename and change types and number of parameters
-    public static c_h_proyecto_especialidad newInstance(String param1, String param2) {
-        c_h_proyecto_especialidad fragment = new c_h_proyecto_especialidad();
+    public static c_h_proyecto_venta_mobiliario_CDMX newInstance(String param1, String param2) {
+        c_h_proyecto_venta_mobiliario_CDMX fragment = new c_h_proyecto_venta_mobiliario_CDMX();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +59,6 @@ public class c_h_proyecto_especialidad extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_c_h_proyecto_especialidad, container, false);
+        return inflater.inflate(R.layout.fragment_c_h_proyecto_venta_mobiliario__c_d_m_x, container, false);
     }
 }

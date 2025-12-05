@@ -36,7 +36,9 @@ public class CapitalHumano extends Fragment {
         ImageButton btnTrabajadores = view.findViewById(R.id.btnTrabajadores);
         ImageButton btnOtraCosa = view.findViewById(R.id.btnOtraCosa);
 
-        
+        btnProyectos.setOnClickListener(v ->
+                abrirFragmento(new Fragment_CH_proyecto_estado())
+        );
 
         // Botón 2 → Fragmento TrabajadoresEstado
         btnTrabajadores.setOnClickListener(v ->

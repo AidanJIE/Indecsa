@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     //cambiar  la linea de abajo por tu ip local
-    private static final String BASE_URL = "http://192.168.0.131:8080/indecsa/api/";
+    private static final String BASE_URL = "http://192.168.68.102:8080/indecsa/api/";
     private static Retrofit retrofit;
 
     public static Retrofit getClient() {
