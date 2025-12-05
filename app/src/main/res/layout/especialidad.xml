@@ -4,40 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
-
-    <!-- Encabezado institucional -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#010238">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="150dp"
-                android:layout_height="80dp"
-                android:src="@drawable/img_1"
-                android:contentDescription="Logo" />
-
-            <TextView
-                android:id="@+id/txtHeaderEspecialidad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Talento que conecta proyectos que transforman"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp" />
-        </LinearLayout>
-    </FrameLayout>
+    android:background="@color/white"
+    android:gravity="center"> <!-- 🔥 Centra todo el contenido -->
 
     <!-- Botones de especialidad -->
     <LinearLayout

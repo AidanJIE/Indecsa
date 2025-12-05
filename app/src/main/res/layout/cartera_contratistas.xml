@@ -4,41 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
-
-    <!-- Encabezado institucional -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#010238">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:gravity="center">
-
-            <!-- Imagen -->
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="150dp"
-                android:layout_height="80dp"
-                android:src="@drawable/img_1"
-                android:contentDescription="Logo" />
-
-            <!-- Texto -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Talento que conecta proyectos que transforman"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp" />
-        </LinearLayout>
-    </FrameLayout>
+    android:background="@color/white"
+    android:gravity="center"> <!-- 🔥 Centra todo el contenido -->
 
     <!-- Contenido scrollable -->
     <ScrollView
@@ -49,7 +16,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"> <!-- 🔥 Centra los elementos dentro -->
 
             <!-- Contratista -->
             <TextView
@@ -63,7 +31,7 @@
             <!-- Asignación de proyecto -->
             <EditText
                 android:id="@+id/edtProyecto"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="Asignación de proyecto"
                 android:layout_marginBottom="16dp"/>
@@ -81,7 +49,7 @@
             <!-- Botón disponible -->
             <Button
                 android:id="@+id/btnDisponible"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Disponible"
                 android:background="@android:color/holo_green_dark"
@@ -91,14 +59,14 @@
             <!-- Fechas -->
             <Button
                 android:id="@+id/btnFechaInicio"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar Fecha de Inicio"
                 android:layout_marginBottom="12dp"/>
 
             <Button
                 android:id="@+id/btnFechaFin"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar Fecha de Fin"
                 android:layout_marginBottom="24dp"/>
@@ -113,7 +81,7 @@
 
             <ListView
                 android:id="@+id/listEquipo"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="1dp"/>
@@ -121,7 +89,7 @@
             <!-- Botón guardar cambios -->
             <Button
                 android:id="@+id/btnGuardar"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Guardar cambios"
                 android:background="#6A1B9A"
