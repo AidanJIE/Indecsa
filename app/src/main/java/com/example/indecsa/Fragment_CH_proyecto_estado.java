@@ -52,13 +52,13 @@ public class Fragment_CH_proyecto_estado extends Fragment {
 
         switch (nombreEstado) {
             case "CDMX":
-                siguienteFragment = new c_h_proyecto_especialidad_CDMX();
+                siguienteFragment = new c_h_proyecto_especialidad();
                 break;
             case "Puebla":
-                siguienteFragment = new c_h_proyecto_especialidad_puebla();
+                siguienteFragment = new c_h_proyecto_especialidad();
                 break;
             case "Hidalgo":
-                siguienteFragment = new c_h_proyecto_especialidad_hidalgo();
+                siguienteFragment = new c_h_proyecto_especialidad();
                 break;
             default:
                 // Opcional: Manejar un caso por defecto si el nombre del estado no coincide
