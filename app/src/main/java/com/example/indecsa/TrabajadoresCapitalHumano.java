@@ -2,19 +2,32 @@ package com.example.indecsa;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log; // Añade esto
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+
+import com.example.indecsa.models.TrabajadorDto;
+import com.example.indecsa.network.ApiService;
+import com.example.indecsa.network.RetrofitClient;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class TrabajadoresCapitalHumano extends Fragment {
 
+    private static final String TAG = "TrabajadoresAPI"; // Añade esto
     private TrabajadorAdapter adapter;
     private String estadoFiltro = "";
     private String especialidadFiltro = "";
@@ -36,18 +49,21 @@ public class TrabajadoresCapitalHumano extends Fragment {
         if (getArguments() != null) {
             estadoFiltro = getArguments().getString("ESTADO_SELECCIONADO", "");
             especialidadFiltro = getArguments().getString("ESPECIALIDAD_SELECCIONADA", "");
+
+            // Añade log para ver qué filtros se están enviando
+            Log.d(TAG, "Filtros recibidos - Estado: " + estadoFiltro + ", Especialidad: " + especialidadFiltro);
+
             actualizarTituloConFiltros();
         }
 
         configurarListView();
-        cargarTrabajadoresFiltrados();
+        cargarTrabajadoresDeAPI();
     }
 
     private void actualizarTituloConFiltros() {
         View view = getView();
         if (view == null) return;
 
-        // ID CORREGIDO: txtTituloObra
         TextView titulo = view.findViewById(R.id.txtTituloObra);
         if (titulo != null) {
             String texto = "Todos los Trabajadores";
@@ -75,16 +91,68 @@ public class TrabajadoresCapitalHumano extends Fragment {
             }
         });
 
-        // ID CORREGIDO: listaTrabajador (ListView en lugar de RecyclerView)
         ListView listView = view.findViewById(R.id.listaTrabajador);
         listView.setAdapter(adapter);
     }
 
-    private void cargarTrabajadoresFiltrados() {
-        List<Trabajador> todosTrabajadores = obtenerTodosTrabajadores();
+    private void cargarTrabajadoresDeAPI() {
+        ApiService api = RetrofitClient.getClient().create(ApiService.class);
+
+        // Log de la URL que se está llamando
+        String url = "trabajadores/filtros?estado=" + estadoFiltro + "&especialidad=" + especialidadFiltro;
+        Log.d(TAG, "Llamando a API: " + url);
+
+        api.getTrabajadoresFiltrados(estadoFiltro, especialidadFiltro)
+                .enqueue(new Callback<List<TrabajadorDto>>() {
+                    @Override
+                    public void onResponse(Call<List<TrabajadorDto>> call, Response<List<TrabajadorDto>> response) {
+                        Log.d(TAG, "Respuesta recibida. Código: " + response.code());
+                        Log.d(TAG, "¿Es exitosa?: " + response.isSuccessful());
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            Log.d(TAG, "Trabajadores recibidos: " + response.body().size());
+
+                            // Convertir DTOs a Trabajadores
+                            List<Trabajador> trabajadores = Trabajador.fromDtoList(response.body());
+                            adapter.actualizarLista(trabajadores);
+
+                            // Mostrar mensaje si no hay resultados
+                            if (trabajadores.isEmpty()) {
+                                Toast.makeText(getContext(), "No se encontraron trabajadores", Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, "Lista de trabajadores vacía");
+                            } else {
+                                Log.d(TAG, "Trabajadores cargados exitosamente: " + trabajadores.size());
+                            }
+                        } else {
+                            String errorMsg = "Error al cargar trabajadores. Código: " + response.code();
+                            Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, errorMsg);
+
+                            // Cargar datos de ejemplo como fallback
+                            cargarDatosEjemplo();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TrabajadorDto>> call, Throwable t) {
+                        String errorMsg = "Error de conexión: " + t.getMessage();
+                        Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, errorMsg);
+                        t.printStackTrace();
+
+                        // Cargar datos de ejemplo como fallback
+                        cargarDatosEjemplo();
+                    }
+                });
+    }
+
+    private void cargarDatosEjemplo() {
+        Log.d(TAG, "Cargando datos de ejemplo...");
+
+        List<Trabajador> trabajadores = obtenerTodosTrabajadores();
         List<Trabajador> trabajadoresFiltrados = new ArrayList<>();
 
-        for (Trabajador trabajador : todosTrabajadores) {
+        for (Trabajador trabajador : trabajadores) {
             boolean cumpleEstado = estadoFiltro.isEmpty() || trabajador.getEstado().equals(estadoFiltro);
             boolean cumpleEspecialidad = especialidadFiltro.isEmpty() || trabajador.getEspecialidad().equals(especialidadFiltro);
 
@@ -94,6 +162,7 @@ public class TrabajadoresCapitalHumano extends Fragment {
         }
 
         adapter.actualizarLista(trabajadoresFiltrados);
+        Log.d(TAG, "Datos de ejemplo cargados: " + trabajadoresFiltrados.size());
     }
 
     private List<Trabajador> obtenerTodosTrabajadores() {
@@ -127,7 +196,7 @@ public class TrabajadoresCapitalHumano extends Fragment {
         if (txtEspecialidad != null) txtEspecialidad.setText("Especialidad: " + trabajador.getEspecialidad());
         if (txtEquipo != null) txtEquipo.setText("Estado: " + trabajador.getEstado());
 
-        // Configurar estrellas - USA TUS DIBUJOS EXISTENTES
+        // Configurar estrellas
         configurarEstrellasDialog(dialog, trabajador.getExperiencia());
 
         // Botones
@@ -161,8 +230,7 @@ public class TrabajadoresCapitalHumano extends Fragment {
         for (int i = 0; i < starIds.length; i++) {
             ImageView star = dialog.findViewById(starIds[i]);
             if (star != null) {
-                // USA TUS PROPIOS DIBUJOS - cambia por los que tengas
-                int drawable = (i < experiencia) ? R.drawable.img : R.drawable.img_1; // ← CAMBIA POR TUS DIBUJOS
+                int drawable = (i < experiencia) ? R.drawable.img : R.drawable.img_1;
                 star.setImageResource(drawable);
             }
         }
