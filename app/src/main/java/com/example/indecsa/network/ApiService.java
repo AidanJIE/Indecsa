@@ -13,6 +13,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -36,6 +39,13 @@ public interface ApiService {
 
     @GET("/indecsa/api/contratistas")
     Call<List<Contratista>> obtenerContratistas();
+
+    @GET("indecsa/api/contratistas")
+    Call<List<Contratista>> obtenerContratistasPorEstadoYEspecialidad(@Query("estado") String estado, @Query("especialidad") String especialidad);
+
+    @PUT("/indecsa/api/contratistas/{id}")
+    Call<Contratista> actualizarContratista(@Path("id") int id, @Body Contratista contratista);
+
 
 
 }

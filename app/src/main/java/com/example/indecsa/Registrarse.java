@@ -123,9 +123,14 @@ public class Registrarse extends Fragment {
     }
 
     private void volverALogin() {
-        // ✅ En lugar de instanciar un Activity con new, lanzamos la Activity
-        Intent intent = new Intent(requireContext(), Inicio_sesion.class);
-        startActivity(intent);
-        requireActivity().finish(); // opcional: cerrar el fragment contenedor
+        // Crear instancia del fragmento de login
+        Inicio_sesion fragmentLogin = new Inicio_sesion();
+
+        // Reemplazar el fragmento actual por el de login
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contenedorfragmentos, fragmentLogin) // R.id.fragment_container = tu contenedor de fragments
+                .addToBackStack(null) // opcional: permite volver atrás
+                .commit();
     }
 }

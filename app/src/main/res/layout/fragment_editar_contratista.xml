@@ -74,7 +74,7 @@
                     android:id="@+id/edidatit4"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:hint="Equipo contratista"
+                    android:hint="Correo"
                     android:background="@drawable/shape_input"
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
                     android:id="@+id/edidatit3"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:hint="Asignación del proyecto"
+                    android:hint="Telefono"
                     android:background="@drawable/shape_input"
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="8dp"
@@ -147,14 +147,7 @@
                 android:textColor="#FFFFFF"
                 android:layout_marginEnd="10dp"/>
 
-            <Button
-                android:id="@+id/btnAgregar"
-                android:layout_width="140dp"
-                android:layout_height="50dp"
-                android:text="AGREGAR"
-                android:textSize="15sp"
-                android:background="@drawable/shape_button"
-                android:textColor="#FFFFFF"/>
+
         </LinearLayout>
 
         <TextView

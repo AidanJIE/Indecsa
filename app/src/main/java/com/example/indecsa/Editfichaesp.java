@@ -5,68 +5,46 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.fragment.app.Fragment;
 
 public class Editfichaesp extends Fragment {
 
-    public Editfichaesp() {
-        // Constructor vacío requerido
-    }
+    private String estadoSeleccionado;
 
-    public static Editfichaesp newInstance(String param1, String param2) {
-        Editfichaesp fragment = new Editfichaesp();
-        Bundle args = new Bundle();
-        args.putString("param1", param1);
-        args.putString("param2", param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public Editfichaesp() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editfichaesp, container, false);
 
-        // Obtenemos los botones
+        // Recibir estado del fragmento anterior
+        if (getArguments() != null) {
+            estadoSeleccionado = getArguments().getString("estado");
+        }
+
         Button btnObra = view.findViewById(R.id.btnObra);
         Button btnRemodelacion = view.findViewById(R.id.btnRemodelacion);
         Button btnVentaMobiliario = view.findViewById(R.id.btnVentaMobiliario);
         Button btnInstalacionMobiliario = view.findViewById(R.id.btnInstalacionMobiliario);
-        // Un solo listener para todos
+
         View.OnClickListener listener = v -> {
-            // Obtener texto del botón presionado
-            String textoBoton = ((Button) v).getText().toString();
+            String especialidadSeleccionada = ((Button) v).getText().toString();
 
-            // Comprobamos según el texto del botón
-            Fragment destino;
-            switch (textoBoton) {
-                case "OBRA":
-                    destino = new FichaObra(); // Fragment para OBRA
-                    break;
-                case "REMODELACIÓN":
-                    destino = new FichaObra();
-                    break;
-                case "VENTA DE MOBILIARIO":
-                    destino = new FichaObra();
-                    break;
-                case "INSTALACIÓN DE MOBILIARIO":
-                    destino = new FichaObra();
-                    break;
-                default:
-                    destino = new FichaObra(); // valor por defecto
-                    break;
-            }
+            // Crear fragmento FichaObra y pasar estado + especialidad
+            FichaObra ficha = new FichaObra();
+            Bundle args = new Bundle();
+            args.putString("estado", estadoSeleccionado);
+            args.putString("especialidad", especialidadSeleccionada);
+            ficha.setArguments(args);
 
-            // Cambiar al fragment correspondiente
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contenedorfragmentos, destino)
+                    .replace(R.id.contenedorfragmentos, ficha)
                     .addToBackStack(null)
                     .commit();
         };
 
-        // Asignamos el listener a todos los botones
         btnObra.setOnClickListener(listener);
         btnRemodelacion.setOnClickListener(listener);
         btnVentaMobiliario.setOnClickListener(listener);
