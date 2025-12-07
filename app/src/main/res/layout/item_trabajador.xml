@@ -3,156 +3,136 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#E6E6E6"
-    android:padding="10dp"
-    android:layout_marginBottom="15dp"
-    android:elevation="3dp">
+    android:background="@android:color/transparent"
+    android:padding="8dp">
 
-    <!-- Encabezado -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FICHA DEL TRABAJADOR:"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:textSize="14sp" />
-
-    <!-- Contenido -->
+    <!-- Tarjeta principal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp">
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:elevation="5dp"
+        android:layout_marginBottom="15dp"
+        android:clipToPadding="false"
+        android:clipToOutline="true"
+        android:backgroundTint="#FFFFFF"
+        android:shape="rectangle"
+        android:layout_marginHorizontal="5dp"
+        android:background="@drawable/ba_card_round">
 
-        <!-- Imagen del contratista -->
-        <ImageView
-            android:id="@+id/imgContratista"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/usuario"
-            android:layout_marginRight="10dp"
-            android:background="#CCCCCC"
-            android:scaleType="centerCrop" />
-
-        <!-- Datos del contratista -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Encabezado -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:text="FICHA DEL TRABAJADOR:"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/txtNombreTrabajador"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre del Trabajador"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#000" />
+        <!-- Contenido -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp">
 
-            <TextView
-                android:id="@+id/DescripcionTrabajador"
-                android:layout_width="wrap_content"
+            <!-- Imagen del trabajador -->
+            <ImageView
+                android:id="@+id/imgContratista"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/usuario"
+                android:scaleType="centerCrop"
+                android:background="#DDDDDD"
+                android:layout_marginRight="12dp"
+                android:clipToOutline="true"
+                android:padding="2dp"
+                android:backgroundTint="#DDDDDD"
+                android:outlineProvider="background" />
+
+            <!-- Datos del trabajador -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Descripción del Trabajador:"
-                android:textSize="14sp"
-                android:textColor="#333" />
-            <TextView
-                android:id="@+id/EspecialidadTrabajador"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Especialidad del trabajador:"
-                android:textSize="14sp"
-                android:textColor="#333" />
-            <TextView
-                android:id="@+id/EquipoTrabajador"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Equipo del Trabajador:"
-                android:textSize="14sp"
-                android:textColor="#333" />
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:id="@+id/editext"/>
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNombreTrabajador"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del Trabajador"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/DescripcionTrabajador"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Descripción del Trabajador"
+                    android:textSize="14sp"
+                    android:textColor="#555" />
+
+                <TextView
+                    android:id="@+id/EspecialidadTrabajador"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Especialidad"
+                    android:textSize="14sp"
+                    android:textColor="#555" />
+
+                <TextView
+                    android:id="@+id/EquipoTrabajador"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Estado"
+                    android:textSize="14sp"
+                    android:textColor="#555" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Botón EDITAR -->
+        <!-- SOLO DOS BOTONES -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="12dp">
+
+            <!-- BOTÓN EDITAR -->
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="EDITAR"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_button_round"
+                android:elevation="4dp"
+                android:layout_marginRight="6dp" />
+
+            <!-- BOTÓN ELIMINAR -->
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="ELIMINAR"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_button_round"
+                android:elevation="4dp" />
+
+        </LinearLayout>
+
     </LinearLayout>
-
-    <!-- Calificación (estrellas) -->
-    <TextView
-    android:id="@+id/ExperienciaTrabajador"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textStyle="bold"
-    android:text="Experiencia"
-    android:textSize="14sp"
-    android:textColor="#333" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="6dp">
-
-
-        <ImageView
-            android:id="@+id/star1"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/star2"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/star3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/star4"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/star5"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_star" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="6dp">
-
-    <Button
-        android:id="@+id/btnDisponibilidad"
-        android:layout_width="280dp"
-        android:layout_height="35dp"
-        android:text="Disponibilidad"
-        android:textAllCaps="false"
-        android:background="#3B3673"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btnEditar"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:background="#3B3673"
-        android:layout_marginHorizontal="15dp"
-        android:text="EDITAR"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF" />
-</LinearLayout>
 
 </LinearLayout>

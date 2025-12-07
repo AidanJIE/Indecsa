@@ -131,9 +131,6 @@ public class c_h_proyecto_toda_fichas extends Fragment {
         configurarEstrellasDialog(dialog, proyecto.getAvance()); // Usa getAvance()
 
         // Botones (se mantienen sus IDs)
-        Button btnEditar = dialog.findViewById(R.id.btnEditar);
-        Button btnDisponibilidad = dialog.findViewById(R.id.btnDisponibilidad);
-
         // ... (Lógica de botones se mantiene) ...
 
         dialog.show();
