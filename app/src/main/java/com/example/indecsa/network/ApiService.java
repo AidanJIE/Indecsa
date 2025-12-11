@@ -3,6 +3,8 @@ package com.example.indecsa.network;
 import com.example.indecsa.models.AdminDto;
 import com.example.indecsa.models.CapHumDto;
 import com.example.indecsa.models.Contratista;
+import com.example.indecsa.models.FichaCompletaDto;
+import com.example.indecsa.models.FichaDto;
 import com.example.indecsa.models.LoginRequestAdmin;
 import com.example.indecsa.models.LoginRequestCapHum;
 import com.example.indecsa.models.LoginResponse;
@@ -56,13 +58,6 @@ public interface ApiService {
     @DELETE("trabajadores/{id}")
     Call<Void> deleteTrabajador(@Path("id") Integer id);
 
-    // ==================== FICHAS ====================
-    @GET("fichas/filtros")
-    Call<List<Object>> getFichasFiltradas(
-            @Query("estado") String estado,
-            @Query("especialidad") String especialidad
-    );
-
     // ==================== CONTRATISTAS ====================
     @POST("contratistas")
     Call<Contratista> crearContratista(@Body Contratista contratista);
@@ -70,11 +65,54 @@ public interface ApiService {
     @GET("contratistas")
     Call<List<Contratista>> obtenerContratistas();
 
-
     @GET("indecsa/api/contratistas")
-    Call<List<Contratista>> obtenerContratistasPorEstadoYEspecialidad(@Query("estado") String estado, @Query("especialidad") String especialidad);
+    Call<List<Contratista>> obtenerContratistasPorEstadoYEspecialidad(
+            @Query("estado") String estado,
+            @Query("especialidad") String especialidad
+    );
 
     @PUT("/indecsa/api/contratistas/{id}")
     Call<Contratista> actualizarContratista(@Path("id") int id, @Body Contratista contratista);
-    
+
+    // ==================== FICHAS ====================
+    // **ELIMINA ESTE - ESTÁ DUPLICADO Y CON Object**
+    // @GET("fichas/filtros")
+    // Call<List<Object>> getFichasFiltradas(
+    //         @Query("estado") String estado,
+    //         @Query("especialidad") String especialidad
+    // );
+
+    @GET("fichas")
+    Call<List<FichaDto>> getAllFichas();
+
+    @GET("fichas/filtros")
+    Call<List<FichaDto>> getFichasFiltradas(
+            @Query("estado") String estado,
+            @Query("especialidad") String especialidad
+    );
+
+    @GET("fichas/estado/{estado}")
+    Call<List<FichaDto>> getFichasPorEstado(@Path("estado") String estado);
+
+    @GET("fichas/especialidad/{especialidad}")
+    Call<List<FichaDto>> getFichasPorEspecialidad(@Path("especialidad") String especialidad);
+
+    @GET("fichas/{id}")
+    Call<FichaDto> getFichaById(@Path("id") Integer id);
+
+    @POST("fichas")
+    Call<FichaDto> createFicha(@Body FichaDto ficha);
+
+    @PUT("fichas/{id}")
+    Call<FichaDto> updateFicha(@Path("id") Integer id, @Body FichaDto ficha);
+
+    @DELETE("fichas/{id}")
+    Call<Void> deleteFicha(@Path("id") Integer id);
+
+    // ==================== FICHAS COMPLETAS ====================
+    @GET("fichas/completas/filtros")
+    Call<List<FichaCompletaDto>> getFichasCompletasFiltradas(
+            @Query("estado") String estado,
+            @Query("especialidad") String especialidad
+    );
 }

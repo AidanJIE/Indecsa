@@ -36,16 +36,6 @@
                 android:hint="Asignación de proyecto"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Experiencia en estrellas -->
-            <RatingBar
-                android:id="@+id/ratingExperiencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="1"
-                android:progressTint="@android:color/holo_orange_light"
-                android:layout_marginBottom="16dp"/>
-
             <!-- Botón disponible -->
             <Button
                 android:id="@+id/btnDisponible"

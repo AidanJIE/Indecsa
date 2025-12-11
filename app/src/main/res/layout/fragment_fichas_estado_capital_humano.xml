@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutFichasEstado"
+    android:id="@+id/holawe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
-    android:gravity="center"> <!-- 🔥 Centra todo el contenido -->
+    android:gravity="center">
 
     <!-- Título -->
     <TextView
-        android:id="@+id/txtTituloEstado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FICHAS POR ESTADO"
+        android:text="FICHAS \n POR ESTADO"
         android:textAlignment="center"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_marginBottom="24dp" />
+        android:textSize="32sp"
+        android:textStyle="bold"/>
 
-    <!-- Contenedor horizontal de botones -->
+    <!-- Contenedor de botones con imagen y texto -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="40dp">
 
-        <!-- Botón Hidalgo -->
+        <!-- Botón 1 con imagen y texto -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginHorizontal="12dp">
-
+            android:layout_marginHorizontal="8dp">
             <ImageButton
-                android:id="@+id/btnHidalgo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/img"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:contentDescription="Estado Hidalgo" />
+                android:id="@+id/btnImagen1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/frame_contorno"
+                android:clipToOutline="true"
+                android:contentDescription="Hidalgo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,65 +47,71 @@
                 android:text="Hidalgo"
                 android:textAlignment="center"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="#000000"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
+
         </LinearLayout>
 
-        <!-- Botón CDMX -->
+        <!-- Botón 2 con imagen y texto -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginHorizontal="12dp">
+            android:layout_marginHorizontal="8dp">
 
             <ImageButton
-                android:id="@+id/btnCDMX"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/img_3"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:contentDescription="Estado CDMX" />
+                android:id="@+id/btnImagen2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:contentDescription="Ciudad de Mexico"
+                android:background="@drawable/frame_contorno"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_3" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CDMX"
-                android:textAlignment="center"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="#000000"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
+
         </LinearLayout>
 
-        <!-- Botón Puebla -->
+        <!-- Botón 3 con imagen y texto -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginHorizontal="12dp">
+            android:layout_marginHorizontal="8dp">
 
             <ImageButton
-                android:id="@+id/btnPuebla"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/img_2"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:contentDescription="Estado Puebla" />
+                android:id="@+id/btnImagen3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:contentDescription="Puebla"
+                android:background="@drawable/frame_contorno"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Puebla"
-                android:textAlignment="center"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:textColor="#000000"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
+
         </LinearLayout>
+
     </LinearLayout>
+
+
 </LinearLayout>

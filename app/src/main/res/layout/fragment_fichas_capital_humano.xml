@@ -7,10 +7,10 @@
     android:padding="10dp">
     <!-- Título -->
     <TextView
-        android:id="@+id/txtTituloObra"
+        android:id="@+id/txtTituloFichas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TRABAJADORES"
+        android:text="Fichas"
         android:textStyle="bold"
         android:textSize="18sp"
         android:gravity="center"
@@ -18,10 +18,10 @@
 
     <!-- Botón Nuevo Trabajador -->
     <Button
-        android:id="@+id/btnNuevoTrabajador"
+        android:id="@+id/btnNuevaFicha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+ NUEVO TRABAJADOR"
+        android:text="+ NUEVA FICHA"
         android:background="@drawable/ba_card_round"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="10dp"
@@ -29,7 +29,7 @@
 
     <!-- Lista de contratistas -->
     <ListView
-        android:id="@+id/listaTrabajador"
+        android:id="@+id/listaFichas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="12dp"
